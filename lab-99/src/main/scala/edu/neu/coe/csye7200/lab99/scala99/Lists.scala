@@ -28,24 +28,45 @@ object P00 {
 object P01 {
 
 //  @scala.annotation.tailrec
-  def last[X](xs: List[X]): X = ??? // TO BE IMPLEMENTED
+  def last[X](xs: List[X]): X = xs match{
+    case Nil => throw new NoSuchElementException("last:empty")
+    case h :: Nil => h
+    case h :: t => last(t)
+  } // TO BE IMPLEMENTED
 }
 
 object P02 {
 
 //  @scala.annotation.tailrec
-  def penultimate[X](xs: List[X]): X = ??? // TO BE IMPLEMENTED
+  def penultimate[X](xs: List[X]): X = xs match{
+    case Nil => throw new NoSuchElementException("empty")
+    case h :: _ :: Nil => h
+    case _ ::t => penultimate(t)
+  } // TO BE IMPLEMENTED
 }
 
 object P03 {
 
 //  @scala.annotation.tailrec
-  def kth[X](k: Int, xs: List[X]): X = ??? // TO BE IMPLEMENTED
+  def kth[X](k: Int, xs: List[X]): X = (k, xs) match{
+    case (0, x :: _) => x
+    case (n, _ :: t) => kth(n - 1, t)
+    case (_, _) => throw new NoSuchElementException("bad")
+  } // TO BE IMPLEMENTED
 }
 
 object P04 {
 
-  def length[X](xs: List[X]): Int = ??? // TO BE IMPLEMENTED
+  def length[X](xs: List[X]): Int = {
+    @scala.annotation.tailrec
+    def trLength[X](xs: List[X], length: Int): Int = {
+      xs match{
+        case Nil => length
+        case _ ::t => trLength(t, length + 1)
+      }
+    }
+    trLength(xs, length = 0)
+  } // TO BE IMPLEMENTED
 }
 
 object P05 {
