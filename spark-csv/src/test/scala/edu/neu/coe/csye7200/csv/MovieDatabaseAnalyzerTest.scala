@@ -26,7 +26,7 @@ class MovieDatabaseAnalyzerTest extends AnyFlatSpec with Matchers with BeforeAnd
   before {
     spark = SparkSession
       .builder()
-      .appName("RatingStats")
+      .appName("AnalyzingMovieRating")
       .master("local[*]")
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
